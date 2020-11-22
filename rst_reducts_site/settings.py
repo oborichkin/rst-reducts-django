@@ -25,7 +25,7 @@ SECRET_KEY = '$&$s36i900izhz+b!&@*3rlgy)man6c2f0-@)1$viyuc=sq0+!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["blooming-ridge-22535.herokuapp.com"]
 
 
 # Application definition
