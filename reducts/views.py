@@ -71,7 +71,7 @@ class QuickReductCalcView(TemplateView):
             errors = None
         except Exception as e:
             sample_data = None
-            reducts = None
+            result = None
             errors = str(e)
         if form.is_valid():
             return render(request, self.template_name, {"form": form, "sample_data": sample_data, "reducts": result, "errors": errors})
