@@ -27,7 +27,7 @@ SECRET_KEY = '$&$s36i900izhz+b!&@*3rlgy)man6c2f0-@)1$viyuc=sq0+!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "blooming-ridge-22535.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "http://rst-reducts.herokuapp.com/"]
 
 
 # Application definition
