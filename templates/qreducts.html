@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-<h1 class="mt-5">FindReducts</h1>
+<h1 class="mt-5">QuickReduct</h1>
 <div class="row">
     <div class="col-sm">
         {% if errors %}
@@ -10,7 +10,7 @@
             </div>
         {% endif %}
         <h2>Ввод данных:</h2>
-        <form action="{% url 'reducts-find' %}" class="form-horizontal" method="post">{% csrf_token %}
+        <form action="{% url 'reducts-quick' %}" class="form-horizontal" method="post">{% csrf_token %}
             {% for field in form %}
             <div class="form-group">
                 <label class="control-label">{{ field.label }}</label>
