@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -32,20 +34,33 @@ class ReductCalcView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = DatasetForm(request.POST)
+        elapsed = 0
         try:
             dataset = [tuple([y for y in x.split(",")]) for x in form.data["csv_string"].split("\r\n")]
             c_attributes = set([int(x) for x in form.data["c_attributes"].split(",")])
             d_attributes = set([int(x) for x in form.data["d_attributes"].split(",")])
             r = RoughSet(dataset)
+            t0 = time.time()
             result = [set(x) for x in reduct(r, c_attributes, d_attributes)]
-            sample_data = dataset
+            t1 = time.time()
+            sample_data = dataset[:min(len(dataset),5)]
             errors = None
+            elapsed = t1 - t0
         except Exception as e:
             sample_data = None
             result = None
             errors = str(e)
         if form.is_valid():
-            return render(request, self.template_name, {"form": form, "sample_data": sample_data, "reducts": result, "errors": errors})
+            return render(
+                request,
+                self.template_name,
+                {
+                    "form": form,
+                    "elapsed": elapsed,
+                    "sample_data": sample_data,
+                    "reducts": result,
+                    "errors": errors
+            })
 
 class QuickReductCalcView(TemplateView):
     template_name = "qreducts.html"
@@ -61,17 +76,30 @@ class QuickReductCalcView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = DatasetForm(request.POST)
+        elapsed = 0
         try:
             dataset = [tuple([y for y in x.split(",")]) for x in form.data["csv_string"].split("\r\n")]
             c_attributes = set([int(x) for x in form.data["c_attributes"].split(",")])
             d_attributes = set([int(x) for x in form.data["d_attributes"].split(",")])
             r = RoughSet(dataset)
+            t0 = time.time()
             result = [qreduct(r, c_attributes, d_attributes)]
-            sample_data = dataset
+            t1 = time.time()
+            sample_data = dataset[:min(len(dataset), 5)]
             errors = None
+            elapsed = t1 - t0
         except Exception as e:
             sample_data = None
             result = None
             errors = str(e)
         if form.is_valid():
-            return render(request, self.template_name, {"form": form, "sample_data": sample_data, "reducts": result, "errors": errors})
+            return render(
+                request,
+                self.template_name,
+                {
+                    "form": form,
+                    "elapsed": elapsed,
+                    "sample_data": sample_data,
+                    "reducts": result,
+                    "errors": errors
+            })
