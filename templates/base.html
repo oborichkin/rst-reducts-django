@@ -71,13 +71,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'reducts-index' %}">Главная <span class="sr-only">(current)</span></a>
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'reducts-index' %}">Главная</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.path == '/find' %}active{% endif %}">
                         <a class="nav-link" href="{% url 'reducts-find' %}">FindReducts</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.path == '/quick' %}active{% endif %}">
                         <a class="nav-link" href="{% url 'reducts-quick' %}">QuickReducts</a>
                     </li>
                 </ul>
