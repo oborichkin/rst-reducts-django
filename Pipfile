@@ -13,3 +13,7 @@ whitenoise = "*"
 
 [requires]
 python_version = "3.8"
+
+[packages.define]
+git = "https://github.com/Oborichkin/define-system"
+editable = true

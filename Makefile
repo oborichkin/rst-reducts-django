@@ -3,3 +3,6 @@ serve:
 
 migrate:
 	pipenv run ./manage.py migrate
+
+freeze:
+	pipenv run pip freeze > requirements.txt

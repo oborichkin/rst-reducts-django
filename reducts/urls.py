@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name='reducts-index'),
     path('find', views.ReductCalcView.as_view(), name='reducts-find'),
-    path('quick', views.QuickReductCalcView.as_view(), name='reducts-quick')
+    path('quick', views.QuickReductCalcView.as_view(), name='reducts-quick'),
+    path('define', views.DefineCalcView.as_view(), name='define')
 ]

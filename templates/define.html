@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<h1 class="mt-5">Define</h1>
+<div class="row">
+    <div class="col-sm">
+        {% if errors %}
+            <div class="alert alert-danger">
+                {{ errors }}
+            </div>
+        {% endif %}
+        <h2>Ввод данных:</h2>
+        <form action="{% url 'define' %}" class="form-horizontal" method="post">{% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label class="control-label">{{ field.label }}</label>
+                <div class="controls">
+                    {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm">
+        <h2>Результат</h2>
+        <p>
+            Время вычисления: {{ elapsed }} секунд
+        </p>
+        <h3>QMT</h3>
+        <table class="table">
+        {% for row in qmt %}
+            <tr>
+                {% for cell in row %}
+                    <td><p>{{ cell }}</p></td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+        <h3>Класс принадлежности: {{ result }}</h3>
+    </div>
+</div>
+{% endblock %}
