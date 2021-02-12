@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from define import make_qmt, classify
+from define.algo import Step
 
 from .forms import DatasetForm, DefineSystemForm
 from .logic import RoughSet, qreduct, reduct
@@ -46,18 +47,20 @@ class DefineCalcView(TemplateView):
                 train_dict[element[-1]].append(element[:-1])
             test_list = [tuple(line.strip().split(",")) for line in form.data["csv_test"].split("\r\n")]
             t0 = time.time()
-            qmt_dict = make_qmt(train_dict)
+            steps = Step()
+            qmt_dict = make_qmt(train_dict, algo_steps=steps)
             qmt = []
             qmt.append([" "] + list(qmt_dict.keys()))
+            steps = steps.html
             for i, i_elem in qmt_dict.items():
                 qmt.append([i] + list(i_elem.values()))
-
             result = classify(train_dict, test_list)
             t1 = time.time()
             elapsed = t1 - t0
             errors = None
         except Exception as e:
             qmt = None
+            steps = ""
             result = None
             errors = str(e)
         if form.is_valid():
@@ -69,7 +72,8 @@ class DefineCalcView(TemplateView):
                     "elapsed": elapsed,
                     "qmt": qmt,
                     "result": result,
-                    "errors": errors
+                    "errors": errors,
+                    "steps": steps
                 }
             )
 

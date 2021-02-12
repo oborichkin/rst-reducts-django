@@ -17,3 +17,4 @@ python_version = "3.8"
 [packages.define]
 git = "https://github.com/Oborichkin/define-system"
 editable = true
+ref = "68b6e8638bb0ed9188d33dba2b22e273b4476f7b"

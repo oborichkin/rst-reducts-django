@@ -42,4 +42,17 @@
         <h3>Класс принадлежности: {{ result }}</h3>
     </div>
 </div>
+<div class="row solution">
+    <div class="col-sm">
+        {% if steps %}
+        <a class="btn btn-primary" data-toggle="collapse" href="#solutionCollapse" role="button" aria-expanded="false" aria-controls="solutionCollapse">Показать пошаговое решение</a>
+
+        <div class="collapse multi-collapse" id="solutionCollapse">
+            <div class="card card-body">
+                {{ steps|safe }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
